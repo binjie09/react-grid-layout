@@ -622,6 +622,8 @@ export default class ReactGridLayout extends React.Component<Props, State> {
   onDragOver: DragOverEvent => void | false = e => {
     e.preventDefault(); // Prevent any browser native action
     e.stopPropagation();
+    if ((Date.now() - this.lastRunTime) < 50) return;
+    this.lastRunTime = Date.now();
 
     // we should ignore events from layout's children in Firefox
     // to avoid unpredictable jumping of a dropping placeholder
